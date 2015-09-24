@@ -3,5 +3,5 @@ import Router from "react-router";
 import routes from "../shared/routes";
 
 Router.run(routes, Router.HistoryLocation, (Handler, state) => {
-  React.render(<Handler name="you" renderedBy="client" />, document.getElementById('app'));
+  React.render(<Handler renderedBy="client" />, document.getElementById('app'));
 });

@@ -11,7 +11,7 @@ import routes from "../shared/routes";
 
 app.get('/*', function (req, res) {
   Router.run(routes, req.url, Handler => {
-    let content = React.renderToString(<Handler name="you" renderedBy="server" />);
+    let content = React.renderToString(<Handler renderedBy="server" />);
     res.render('index', { content: content });
   });
 });
