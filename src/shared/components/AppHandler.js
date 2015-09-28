@@ -1,29 +1,44 @@
 import React from "react";
 
 export default class AppHandler extends React.Component {
-  constructor() {
-    super();
-    this.username = this._getName();
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      username: this.getName()
+    };
   }
 
-  render() {
-    return <div>Hello, { this.username }!
-      This text was rendered by the { this.props.renderedBy }.</div>;
+  getNewName() {
+    this.setState({
+      username: this.getName()
+    });
   }
 
-  _getName() {
+  getName() {
     var possibleNames = [
       'You',
       'Me',
       'Mr Baggins',
       'Whatever'
     ],
-      chosenNameIndex = this._getRandomInt(0, possibleNames.length);
+      chosenNameIndex = this.getRandomInt(0, possibleNames.length);
 
     return possibleNames[chosenNameIndex];
   }
 
-  _getRandomInt(min, max) {
+  getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
   }
+
+  render() {
+    return <div>Hello, { this.state.username }!
+      This text was rendered by the { this.props.renderedBy }.
+
+      <button type="button" onClick={this.getNewName.bind(this)}>Get new name</button>
+    </div>;
+  }
 };
+
+AppHandler.propTypes = { renderedBy: React.PropTypes.string };
+AppHandler.defaultProps = { renderedBy: 'nothing' };
